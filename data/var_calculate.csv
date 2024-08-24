@@ -1,0 +1,13 @@
+study.id,author,es.id,dop,yi,ci.lb,ci.ub,association,obs_suicides,design,N
+2,Putkonen et al,5,2001,424.8,190.9,945.6,SMR,6,cohort,132
+3,Coffey et al,6,2003,9.2,5.8,14.7,SMR,23,cohort,2849
+5,Lindqvist et al,7,2007,25.06,11.46,47.58,SMR,9,cohort,176
+9,Lim et al,8,2012,1,0.7,1.4,SMR,35,cohort,155272
+10,Binswanger et al,9,2013,3.23,2.86,3.63,SMR,212,cohort,30636
+11,Pridemore,10,2014,0.68,0.39,1.18,OR,16,case control,292
+12,Spittal et al,11,2014,7.6,6.8,8.4,SMR,371,cohort,41970
+8,Dirkzwager et al,12,2012,7.3,4.12,12.93,OR,12,cohort,597
+14,Elonheimo et al,13,2017,2.9,1.2,7.2,OR,17,cohort,76208
+15,Jones et al,14,2017,3.45,10.28,19.76,SMR,39,cohort,41495
+16,Barry et al,15,2018,2.4,0.51,11.24,HR,2,cohort,7671
+4,Pratt et al,16,2006,13.5,12.2,14.9,RR,382,cohort,244988

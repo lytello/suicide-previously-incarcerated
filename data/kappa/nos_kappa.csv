@@ -1,0 +1,129 @@
+year,study,design,question,rater_1,rater_2
+1998,Joukamaa,cohort,selection_1,a,a
+1998,Joukamaa,cohort,selection_2,a,a
+1998,Joukamaa,cohort,selection_3,a,a
+1998,Joukamaa,cohort,selection_4,a,a
+1998,Joukamaa,cohort,comparability_1,a,"a, b"
+1998,Joukamaa,cohort,outcome_1,b,b
+1998,Joukamaa,cohort,outcome_2,a,a
+1998,Joukamaa,cohort,outcome_3,d,d
+2001,Putkonen et al,cohort,selection_1,a,a
+2001,Putkonen et al,cohort,selection_2,a,a
+2001,Putkonen et al,cohort,selection_3,a,a
+2001,Putkonen et al,cohort,selection_4,a,a
+2001,Putkonen et al,cohort,comparability_1,a,a
+2001,Putkonen et al,cohort,outcome_1,b,b
+2001,Putkonen et al,cohort,outcome_2,a,a
+2001,Putkonen et al,cohort,outcome_3,d,d
+2003,Coffey et al,cohort,selection_1,a,a
+2003,Coffey et al,cohort,selection_2,a,a
+2003,Coffey et al,cohort,selection_3,a,a
+2003,Coffey et al,cohort,selection_4,a,a
+2003,Coffey et al,cohort,comparability_1,a,"a, b"
+2003,Coffey et al,cohort,outcome_1,b,b
+2003,Coffey et al,cohort,outcome_2,a,a
+2003,Coffey et al,cohort,outcome_3,b,d
+2006,Pratt et al,cohort,selection_1,a,a
+2006,Pratt et al,cohort,selection_2,a,a
+2006,Pratt et al,cohort,selection_3,a,a
+2006,Pratt et al,cohort,selection_4,a,a
+2006,Pratt et al,cohort,comparability_1,a,"a, b"
+2006,Pratt et al,cohort,outcome_1,b,b
+2006,Pratt et al,cohort,outcome_2,a,a
+2006,Pratt et al,cohort,outcome_3,d,d
+2007,Lindqvist et al,cohort,selection_1,a,a
+2008,Nieuwbeerta et al,cohort,selection_1,a,a
+2008,Rosen et al,cohort,selection_1,a,a
+2012,Dirkzwager et al,cohort,selection_1,a,a
+2012,Lim et al,cohort,selection_1,a,a
+2013,Binswanger et al,cohort,selection_1,a,a
+2007,Lindqvist et al,cohort,selection_2,a,a
+2008,Nieuwbeerta et al,cohort,selection_2,a,a
+2008,Rosen et al,cohort,selection_2,a,a
+2012,Dirkzwager et al,cohort,selection_2,a,a
+2012,Lim et al,cohort,selection_2,a,a
+2013,Binswanger et al,cohort,selection_2,b,a
+2007,Lindqvist et al,cohort,selection_3,a,a
+2008,Nieuwbeerta et al,cohort,selection_3,a,a
+2008,Rosen et al,cohort,selection_3,a,a
+2012,Dirkzwager et al,cohort,selection_3,a,a
+2012,Lim et al,cohort,selection_3,a,a
+2013,Binswanger et al,cohort,selection_3,a,a
+2007,Lindqvist et al,cohort,selection_4,a,a
+2008,Nieuwbeerta et al,cohort,selection_4,a,a
+2008,Rosen et al,cohort,selection_4,a,a
+2012,Dirkzwager et al,cohort,selection_4,a,a
+2012,Lim et al,cohort,selection_4,a,a
+2013,Binswanger et al,cohort,selection_4,a,a
+2007,Lindqvist et al,cohort,comparability_1,a,a
+2008,Nieuwbeerta et al,cohort,comparability_1,a,a
+2008,Rosen et al,cohort,comparability_1,a,"a, b"
+2012,Dirkzwager et al,cohort,comparability_1,a,a
+2012,Lim et al,cohort,comparability_1,a,a
+2013,Binswanger et al,cohort,comparability_1,a,a
+2007,Lindqvist et al,cohort,outcome_1,b,b
+2008,Nieuwbeerta et al,cohort,outcome_1,b,b
+2008,Rosen et al,cohort,outcome_1,b,b
+2012,Dirkzwager et al,cohort,outcome_1,b,b
+2012,Lim et al,cohort,outcome_1,b,b
+2013,Binswanger et al,cohort,outcome_1,b,b
+2007,Lindqvist et al,cohort,outcome_2,a,a
+2008,Nieuwbeerta et al,cohort,outcome_2,a,a
+2008,Rosen et al,cohort,outcome_2,a,a
+2012,Dirkzwager et al,cohort,outcome_2,a,a
+2012,Lim et al,cohort,outcome_2,a,a
+2013,Binswanger et al,cohort,outcome_2,a,a
+2007,Lindqvist et al,cohort,outcome_3,b,d
+2008,Nieuwbeerta et al,cohort,outcome_3,d,d
+2008,Rosen et al,cohort,outcome_3,b,b
+2012,Dirkzwager et al,cohort,outcome_3,c,c
+2012,Lim et al,cohort,outcome_3,d,d
+2013,Binswanger et al,cohort,outcome_3,b,d
+2014,Spittal et al,cohort,,,
+2014,Haglund et al,cohort,selection_1,a,a
+2017,Elonheimo et al,cohort,selection_1,a,a
+2017,Jones et al,cohort,selection_1,a,a
+2018,Barry et al,cohort,selection_1,b,b
+2014,Spittal et al,cohort,selection_2,a,a
+2014,Haglund et al,cohort,selection_2,a,a
+2017,Elonheimo et al,cohort,selection_2,a,a
+2017,Jones et al,cohort,selection_2,a,a
+2018,Barry et al,cohort,selection_2,b,b
+2014,Spittal et al,cohort,selection_3,a,a
+2014,Haglund et al,cohort,selection_3,a,a
+2017,Elonheimo et al,cohort,selection_3,a,a
+2017,Jones et al,cohort,selection_3,a,a
+2018,Barry et al,cohort,selection_3,a,a
+2014,Spittal et al,cohort,selection_4,a,a
+2014,Haglund et al,cohort,selection_4,a,a
+2017,Elonheimo et al,cohort,selection_4,a,a
+2017,Jones et al,cohort,selection_4,a,a
+2018,Barry et al,cohort,selection_4,a,a
+2014,Spittal et al,cohort,comparability_1,a,"a, b"
+2014,Haglund et al,cohort,comparability_1,"a,b","a, b"
+2017,Elonheimo et al,cohort,comparability_1,a,a
+2017,Jones et al,cohort,comparability_1,"a,b","a,b"
+2018,Barry et al,cohort,comparability_1,"a,b","a,b"
+2014,Spittal et al,cohort,outcome_1,b,b
+2014,Haglund et al,cohort,outcome_1,b,b
+2017,Elonheimo et al,cohort,outcome_1,b,b
+2017,Jones et al,cohort,outcome_1,b,b
+2018,Barry et al,cohort,outcome_1,b,b
+2014,Spittal et al,cohort,outcome_2,a,a
+2014,Haglund et al,cohort,outcome_2,a,a
+2017,Elonheimo et al,cohort,outcome_2,a,a
+2017,Jones et al,cohort,outcome_2,a,a
+2018,Barry et al,cohort,outcome_2,a,a
+2014,Spittal et al,cohort,outcome_3,d,d
+2014,Haglund et al,cohort,outcome_3,b,b
+2017,Elonheimo et al,cohort,outcome_3,b,b
+2017,Jones et al,cohort,outcome_3,b,b
+2018,Barry et al,cohort,outcome_3,d,d
+2014,Pridemore,case control,selection_1,a,a
+2014,Pridemore,case control,selection_2,a,a
+2014,Pridemore,case control,selection_3,a,a
+2014,Pridemore,case control,selection_4,a,a
+2014,Pridemore,case control,comparability_1,"a,b","a, b"
+2014,Pridemore,case control,exposure_1,b,b
+2014,Pridemore,case control,exposure_2,a,a
+2014,Pridemore,case control,exposure_3,not specified,not specified

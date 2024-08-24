@@ -1,0 +1,185 @@
+---
+title: "preprocessing"
+author: "Lawrence Y. Tello"
+date: "12/10/2020"
+output:
+  html_document: default
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        "outputs/",
+         "preprocessing",
+           sep=""),
+        envir = globalenv()
+        )
+    })
+---
+
+```{r, include=F}
+library(epiR)
+library(tidyverse)
+library(meta)
+library(metafor)
+```
+
+### Preprocessing
+
+#### Caculating odds ratios & variances
+
+* escalc() spits out the log of the OR
+* will need to log the ORs/SMRs not calculated manually
+```{r OR & var calc, include=F}
+dat <- read_csv("data/OR_calculate.csv")
+OR_calc <- escalc(measure="OR",           # the effect size or outcome measure type
+                   ai=tpos,           # upper left cell (positive in treatment group)
+                   bi=tneg,           # upper right cell (negative in treatment group)
+                   ci=cpos,           # lower left cell (positive in control group)
+                   di=cneg,           # lower right cell (negative in control group)
+                   data=dat)
+OR_calc <- OR_calc %>% 
+  mutate(association = "OR") %>%      # adding label for measure type
+  select(-c(tpos, tneg, cpos, cneg))  # clean up
+```
+
+#### Calculating variance with 95% CI's
+
+[Chochrane provides formulas to calculate variance and CIs: 6.4 Dichotomous outcome data.] (https://training.cochrane.org/handbook/current/chapter-06#section-6-3-2)
+
+For 95% CI: 
+
+lower limit = ln(lower confidence limit given for OR)
+upper limit = ln(upper confidence limit given for OR)
+intervention effect estimate = lnRR
+
+
+Standard error:
+
+(upper limit - lower limit) / 3.92
+
+```{r var calc, include=F}
+dat <- read_csv("data/var_calculate.csv")
+var_calc <- dat %>% 
+  mutate(ln.ci.lb = log(ci.lb),   
+         ln.ci.ub = log(ci.ub),
+         vi = (ln.ci.ub - ln.ci.lb) / 3.92,       # variance/SE
+         yi = log(yi)) %>%                        # log effects for consistency
+  select( -c(ci.lb, ci.ub, ln.ci.lb, ln.ci.ub) )  # clean-up
+```
+
+#### Combine
+
+```{r, include=F}
+dat <- rbind(OR_calc, var_calc) %>%
+  mutate(author = paste0(author, " (", dop, ")"))  # making author label
+
+rm(OR_calc, var_calc)
+
+saveRDS(dat, "data/processed_data.rds")
+```
+
+#### Model 1: Fixed effect meta-analysis 
+
+```{r, fig.width=7, fig.height=5}
+model_1 <- metagen(yi,
+                   vi,
+                   data=dat,
+                   studlab=paste(author),
+                   comb.fixed=TRUE,
+                   comb.random=FALSE,
+                   prediction=TRUE,
+                   sm="SMD")
+#model_1
+
+forest(model_1,
+       layout = "JAMA",
+       text.predict = "95% PI",
+       col.predict = "#02a4d3"
+        )
+```
+
+
+#### Model 2: Random effects meta-analysis combining all
+
+```{r, fig.width=8, fig.height=5}
+model_2 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = dat,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  method.tau = "SJ",
+                  hakn = TRUE,
+                  prediction = TRUE,
+                  sm = "PM")
+#model_2
+forest(model_2)
+#funnel(model_2, xlab = "Hedges' g", studlab = TRUE)
+```
+
+#### Model 3: Random effects with OR, risk, and hazard ratios only
+
+```{r, fig.width=8, fig.height=5}
+ratios_only <- dat %>%
+  filter(association %in% c("OR", "RR", "HR"))
+
+model_3 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = ratios_only,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  method.tau = "SJ",
+                  hakn = TRUE,
+                  prediction = TRUE,
+                  sm = "PM")
+model_3
+forest(model_3)
+funnel(model_3, xlab = "Hedges' g", studlab = TRUE)
+```
+
+#### Model 4: Random effects cohort studies only
+
+```{r, fig.width=8, fig.height=5}
+cohort_only <- dat %>%
+  filter(design == "cohort")
+
+model_4 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = cohort_only,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  method.tau = "SJ",
+                  hakn = TRUE,
+                  prediction = TRUE,
+                  sm = "PM")
+model_4
+forest(model_4)
+funnel(model_4, xlab = "Hedges' g", studlab = TRUE)
+```
+
+#### Model 5: Observed suicides > 20
+
+```{r, fig.width=8, fig.height=5}
+suicide_20plus <- dat %>%
+  filter(obs_suicides > 99)
+
+model_5 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = suicide_20plus,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  method.tau = "SJ",
+                  hakn = TRUE,
+                  prediction = TRUE,
+                  sm = "ML")
+model_5
+forest(model_5)
+funnel(model_5, xlab = "Hedges' g", studlab = TRUE)
+```
+
+An estimate of effect may be presented along with a confidence interval or a P value. It is usually necessary to obtain a SE from these numbers, since software procedures for performing meta-analyses using generic inverse-variance weighted averages mostly take input data in the form of an effect estimate and its SE from each study (see Chapter 10, Section 10.3). The procedure for obtaining a SE depends on whether the effect measure is an absolute measure (e.g. mean difference, standardized mean difference, risk difference) or a ratio measure (e.g. odds ratio, risk ratio, hazard ratio, rate ratio). We describe these procedures in Sections 6.3.1 and 6.3.2, respectively. However, for continuous outcome data, the special cases of extracting results for a mean from one intervention arm, and extracting results for the difference between two means, are addressed in Section 6.5.2.
+
+

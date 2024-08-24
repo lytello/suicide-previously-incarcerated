@@ -1,0 +1,569 @@
+---
+title: "Assessing suicides among previously incarcerated persons: A systematic review and meta-analysis"
+author: "Lawrence Y. Tello"
+date: "April 18, 2021"
+output: word_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        "outputs/",
+         "writing",
+           sep=""),
+        envir = globalenv()
+        )
+    })
+bibliography: ["./data/formatting/previous_offenders.bib"]
+csl: ./data/formatting/nature.csl
+link-citations: true
+---
+
+```{r,include=F, eval=F}
+# You can include this knit parameter to the YAML if you want to knit to a 
+# specific location and append a new date. I used this setup to ensure my work
+# was version controlled both in my code and outputs, allowing me to look back
+# over time easily.
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        "<file location>",
+         "capstone_lyt_",
+          format(Sys.time(), "%Y-%m-%d"),
+           sep=""),
+        envir = globalenv()
+        )
+    })
+```
+
+
+<center> 
+
+UC Berkeley School of Public Health
+
+Epidemiology/Biostatistics MPH Program
+
+Academic Advisor: John Colford
+
+Acknowledgments: Navya Pothamsetty, Katie Patrick
+
+</center>
+
+```{r libraries, include=F}
+library(tidyverse)
+library(rel)
+library(flextable)
+library(officer)
+library(meta)
+library(metafor)
+library(dmetar)
+```
+
+### Abstract
+
+__Background:__ Prisoners are known to experience a substantial burden of physical and psychiatric disorders relative to the general population. Past research has revealed a higher risk of all-cause mortality among previously incarcerated persons when compared to those never incarcerated. Less attention, however, has been given to the risk of suicide among previously incarcerated persons. __Method:__ 3 databases (PubMed, EMBASE, and PsychINFO) were systematically searched for terms related to suicide and imprisonment. Studies were included if they compared suicide risk among previously incarcerated persons to general population controls that were similar based on age-, gender, and race/ethnicity. __Results:__ 2237 title/abstracts were screened. 78 full-text articles were reviewed for inclusion. A final sample of 16 studies representing 650,430 individuals that were previously incarcerated between 1998 to 2018. Most of the studies involved only men, were located in high-income Westernized countries. Random-effects meta-analysis revealed an elevated risk of suicide among previously incarcerated persons when compared to the general population, OR = 5.19 (95% CI: 2.45, 11.01), K = 16, z = 4.3, p < 0.0001. __Conclusions:__ Previously incarcerated persons are at a higher risk of suicide completion than the general population. However, the size of this effect remains unclear due to the large amount of heterogeneity across pooled studies. Despite the heterogeneity, the direction of the effect was consistent across main and sub-analyses. Further research is needed to better understand the risks previously incarcerated persons face when re-entering the community. 
+
+### Introduction
+
+The most recent report of the World Prison Population List found that more than 10.74 million people are incarcerated throughout the world[@walmsley_world_2018]. The current world prison population rate estimate, based on United Nations estimates of national population levels, is 145 per 100,000 persons. Half of the world's prison population is held in the United States, China, or Russia. The United States currently leads with the highest prison population rate at 655 per 100,000 persons. Although crime rates have remained stable or declined from the 1970s to the early 2000, many new prisons were built and anti-crime policies became increasingly severe[@noauthor_growth_2014]. For example, mandatory minimum sentencing laws and three-strikes provisions have pushed higher rates of incarceration and magnified public health problems among vulnerable communities[@sinha_arbitrary_2016; @nunn_race_2002]. To put these disparities inequity into perspective, within the US, people of color represent 39% of the national population, but make up 60% of incarcerated persons. Among these incarcerated persons, people with disabilities are 4 times as likely as non-disabled people to end up in jail[@vallas_mass_2016]. The system further disproportionately targets low-income populations with un-affordable bail, court imposed fees, or fines. The effects of incarceration do not stop at the individual incarcerated. Parental incarceration increases children's risk of substance abuse, involvement in crime, and a host of physical and mental health issues, which limit children's opportunity for a healthy life[@lee_impact_2013; @noauthor_incarcerated_2009; @hamilton_collateral_2010]. Communities and entire nations are affected by mass incarceration, where higher rates of incarceration may disrupt social and family networks, reduce economic development, and sow distrust in law enforcement[@stemen_prison_2017]. In the United States, the combination of local, state, and federal government spending is almost $180 billion each year on policing, corrections, and criminal court systems[@wagner_following_2017]. 
+
+Prisoners are known to experience a substantial burden of physical and psychiatric disorders relative to the general population[@mohan_systematic_2018; @fazel_health_2011]. Several systematic reviews have identified that incarcerated and/or formally incarcerated individuals have an increased risk of depression and psychosis[@fazel_severe_2012], cardiovascular disease[@mohan_systematic_2018], and all-causae mortality[@zlodre_all-cause_2012]. Given the concerning amount of risk factors that incarcerated persons bring with them and the exposures experienced during imprisonment, it is unlikely these same risks are addressed when released. The prison experience is known to impact employment opportunities[@brunton-smith_impact_2014; @bui_impact_2010-1], social-emotional relationships[@bahr_successful_2010], and health[@aldridge_morbidity_2018].
+
+Among the growing body of research examining the health of previously incarcerated persons, findings reveal a higher risk of all-cause mortality compared to those never imprisoned, with elevated risk in the early release period[@aldridge_morbidity_2018; @forsyth_incidence_2018; @fazel_health_2011]. Of particular concern for the present review and meta-analysis is the risk of suicide among released prisoners. Research in this area has been slow and limited to high income countries. These studies have reported an an elevated risk for suicide compared with age-matched general populations[@jones_mortality_2017; @skinner_systematic_2020; @fazel_health_2011]. However, a growing body research examining suicide among current prisoners is cause for concern. The prevailing cause of death among current prisoners is suicide[@forrester_preventing_2014]. The risk of death is highest during the first weeks of incarceration. A meta-analysis of 77 studies examining the risk of suicide inside prisons found that rates of suicide among people in prison are elevated compared with people of similar age and gender who are living in the community[@zhong_risk_2021]. This meta-analysis spanned across 1973 to 2020, highlighting an ongoing public health problem for death by suicide among prisoners.
+
+The present systematic review and meta-analysis seeks to better understand how exposure to previous incarceration relates to suicide risk by comparing suicides among previously incarcerated persons to suicides among the general population.
+
+### Methods
+
+#### Protocol and registration
+
+A review protocol was registered on 11/29/2020 on PROSPERO prior to data extraction. The [registration ID is CRD42020213502 and is accessible on PROSPERO](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42020213502).
+
+#### Eligibility criteria
+
+Studies were eligible if they reported suicide death among previously incarcerated persons compared to the general population. Researchers will have needed to either prospectively follow previously incarcerated persons until a suicide death or retrospectively record link those who were previously incarcerated to a death certificate. 
+
+Previously incarcerated persons must have been currently released from prison at the time of the study. Incarceration is operationalized as the state of being confined in prison under lawful custody. The allowed study designs were cohort studies (retrospective and prospective) and case-control studies. It is unlikely to find any studies in the literature examining this exposure outcome relationship with a randomized-controlled trial. Moreover, the goal of the current study is to examine the association of exposure and outcome without any intervention. Previously incarcerated persons must have been currently released from prison at the time of the study. The general population comparison must be similar based on age-, gender-, and race/ethnicity. This similarity may be accounted for through statistical adjustment or matching if in a case-control study. Additionally, the general population comparison must never have been previously incarcerated and may not have any psychiatric conditions. These criteria for the general population are necessary to achieve the closest control group to the ideal counterfactual. To be included in this review, every study must either have provided a measure of association or provided enough information to calculate an odds ratios. There was no limitation on time, location of study population, or type of offense. All studies must have been written in English. Previously incarcerated persons were not restricted based on psychiatric conditions. It is well known that psychiatric conditions are risk factors for suicide[@franklin_risk_2017] and that many persons incarcerated have psychiatric-related comorbidities[@ceylan_high_2019; @andersen_mental_2004; @sepehrmanesh_prevalence_2014]. However, given that most of the suicide deaths are drawn from record linkage, determining whether a previously incarcerated persons had a psychiatric condition at the time of death is not feasible. Moreover, making the claim that if a psychiatric condition is not recorded does not preclude the possibility of a psychiatric condition being present at the time of death.
+
+#### Information sources
+
+Studies were identified by searching three databases on October 30th, 2020: PubMed, EMBASE, and PsychINFO. Databases were identified based on recent reviews of suicidality among prisoners. In addition to database searching, backward and forward reference searching and snowball searching techniques were used.
+
+#### Search
+
+Across all databases, the following search string was used: (suicide* OR 'self harm' OR 'self mutilation' OR suicidal* OR ‘suicidal ideation’ OR ‘self-injury’ OR nssi OR self-destruct* OR overdose OR ‘non-suicidal self injury’) AND (prison* OR inmate* OR penal OR correction* OR sentence* OR remand OR detainee* OR felon* OR incarcerated*).
+
+#### Study selection
+
+Studies were first evaluated at the title and abstract level and later as full-text. Eligibility was independently assessed among three reviewers, where two reviewers made assessments and the third reviewer was involved when disagreements occurred. The third reviewer facilitated the discussion until a consensus was made. All steps of the study selection were completed in Covidence[@noauthor_covidence_nodate], which is a software designed to streamline systematic reviews. Cohen's kappa was calculated to measure inter-rater reliability for both the title/abstract and full-text selection stages. 
+
+#### Data collection process
+
+Data extraction occurred via a spreadsheet. A coding manual was developed to guide the extraction of study descriptions, measures of association, and, when applicable, data used to directly calculate odds ratios. 
+
+When the standard error was not provided, the following formula was used to derive the standard error by using the 95% confidence interval[@freels_extracting_2004]:
+
+> lower limit = ln(lower confidence limit given for a given ratio)
+
+> upper limit = ln(upper confidence limit given for a given ratio)
+
+> standard error = (upper limit - lower limit) / 3.92
+
+Studies without both the standard error and confidence intervals were not included.
+
+#### Data items
+
+Study descriptive characteristics, measures of association, and, when available, data necessary for computing odds ratios were extracted. These included study design, measures of association (odds ratios, standardized mortality ratios), sample size, observed suicide death counts, and participant demographics (Table 1). 
+
+#### Risk of bias in individual studies
+
+Risk of bias was assessed using the Newcastle-Ottawa Quality Assessment Scale (NOS)[@wells_newcastle-ottawa_2009], which was designed to assess the quality of non-randomized studies. The NOS distinguishes between case-control studies and cohort studies and assess aspects of methodology in observational studies related to study quality, including selection of cases, comparability of populations, and ascertainment of exposure to risks. Two raters independently rated each study with the NOS. When disagreements occurred the two raters discussed the conflict until there was agreement. Cohen's kappa was calculated to measure inter-rater reliability. 
+
+#### Summary measures
+
+Measure of association used to demonstrate the relationship between previously incarcerated persons and suicide varied by study. Whenever possible, odds ratios were calculated from the data provided. Aside from the odds ratio, the second most common study measure was the standardized mortality ratio (SMR), followed by risk ratios and hazard ratios.
+
+#### Synthesis of results
+
+All reported effects that met the inclusion criteria were included. If any two studies used the same data source the study that included larger sample sizes was chosen over the other, which was the case between Binswanger et al (2013)[@binswanger_mortality_2013] and Binswanger et al (2007)[@binswanger_release_2007].
+
+Due to the differences in study design, time periods, locations, and methods at ascertaining outcome, a pooled effect size and 95% confidence intervals were calculated using random effects meta-analysis with the Paule-Mandel estimator[@veroniki_methods_2016; @panityakul_estimating_2013]. The effects included in the meta-analysis were odds, risk, or hazard ratios, and standardized mortality ratios. Heterogeneity between studies was assessed with the $I^{2}$ statistic, which measures the percentage of variability in the outcome that is due to between study heterogeneity rather than chance. 
+
+Despite the mentioned differences across studies, the identical exposure to incarceration across studies implies that there may be a common exposure-outcome effect. Therefore, a fixed-effect meta-analysis was also conducted.
+
+Two sub-analyses with a random effects meta-analysis were also performed. The first sub-analyses included only studies where the effect was measured with odds, risk, and hazard ratios. In rare events, such as suicide, the risk ratio may approximate to the odds ratio, and vice versa. By including only measures that may approximate each other, the effect may be better captured than when including less similar measures such as the SMR. The second sub-analyses included studies where the effect was measured with SMRs only. Similar to the first sub-analysis, by only including similar measures may the the effect be better captured.
+
+Lastly, a sensitivity analysis was conducted to address the heterogeneity in the observed meta-analyses. Each study was omitted one at a time to test whether the main effect still held true. 
+
+All analyses was completed in R version 4.0.3 (2020-10-10) and with the metafor (2.4-0) and meta (4.16-1) packages.
+
+#### Risk of bias across studies
+
+Risk of bias across studies was assessed through visual inspection of funnel plots for asymmetry both in the overall sample and in the listed sub-analyses. The fill-and-trim method was also applied to funnel plots to estimate potentially missing studies[@shi_trim-and-fill_2019].
+
+### Results
+
+#### Study selection
+
+One search was performed on October 30th, 2020, and additional citations were found from backward, forward, and snowball searching yielding 2214 and 23 citations respectively (Figure 1). After excluding based on title and abstract, full texts were reviewed for the remaining 78 studies. The final sample included 16 studies representing 650,430 individuals released from prison across 1998 to 2018 (Table 1). Among the 62 exclusions, the most common reason was due to the wrong outcome (n = 20). The second most common reason for exclusion was the incorrect comparator (n = 16), where a general population similar age, gender, and race/ethnicity comparison was not used. The remaining exclusions were due to incorrect study design (n = 14) or the wrong patient population (n = 12). Cohen's kappa was run to determine if there was agreement between raters for abstract/title and full-text decisions. There was substantial agreement between reviewers for title/abstract, __K__ = 0.64 (95% CI: 0.55, 0.75), and between reviewers for full-text review, __K__ = 0.66 (95% CI: 0.49, 0.83).
+
+```{r abstract title kappa, include=F}
+abstract_kappa <- read_csv("data/kappa/abstract_kappa.csv")
+library(rel)
+ckap(abstract_kappa, weight = "unweighted",      # K = 0.64
+     std.err = "Cohen",                          # (0.55, 0.74)
+     conf.level = 0.95)
+
+
+title_kappa <- read_csv("data/kappa/title_kappa.csv")
+ckap(title_kappa, weight = "unweighted",         # 0.66
+     std.err = "Cohen",                          # (0.49, 0.83)
+     conf.level = 0.95)
+```
+
+#### Study characteristics
+
+The largest percentage of trials were conducted in the United States (31.25%), followed by Finland (18.7%) and with equal representation (12.5%) across Australia, Netherlands, and Sweden. Previous incarcerated persons included in the sample were 81.66% male. The time periods of the studies ranged from 1998 to 2018. The measure of association used was tied between ORs and SMRs at 43.75% and the remaining measures of association split between HR and RR at 6.25%. Sample sizes had a large range across studies from 132 to 41,495. 
+
+#### Risk of bias within studies
+
+Table 2 presents results from the Newcastle-Ottawa Quality Assessment Scale. All studies, with the exception of Barry et al (2018)[@barry_increased_2018] for one of the selection criteria, had low risk of bias for selection and comparability criteria. Overall, studies had a low risk of bias for outcome with the exception of one of the three outcome questions. Nearly half of the studies, for this question that assessed the adequacy of follow-up of cohorts, provided “no statement” and therefore received a high risk of bias for this particular question. Four studies received a low risk of bias score across all criteria. Cohen's kappa was calculated to determine agreement among raters for the risk of bias assessment. There was almost perfect agreement among raters, __K__ = 0.82 (95% CI: 0.72, 0.92). 
+
+Although the Newcastle-Ottawa Quality Assessment scale provides an idea about the risk of bias within a given study, there are limitations to the type of information captured, especially with respect to important qualitative information. The majority of the studies ascertained selection by acquiring a list of those previously incarcerated from government records and linking the outcome of suicide death to a death certificate. There are number of challenges related to linkage with variations across countries[@harron_challenges_2017]. One major concern is that records may lack a common entity identifier across data sets, which may result in the loss of data or inaccurate matching through the use of quasi-identifiers. With sensitive data, such as death records and incarceration history, there is an added layer of security that researchers need to complete before accessing the data. These types of records may be limited in their scope, such as only providing information for a certain county rather than an entire state, placing the researcher in a cost benefit situation of where to allocate resources. Once a database is acquired, there is uncertainty of the underlying accuracy. Some databases are static while others are dynamic. If an error is made in a database but corrected after it is acquired by the researcher, issues with misclassificaiton may exist, such as a death inaccurately being reported as a suicide instead of an overdose. 
+
+Rosen et al (2008) is an example of how researchers employ best practices but are limited in their ability to utilize the full amount of data available. In this study the researchers used 4 identifiers across two databases: last name, first name, date of birth, and last 4 digits of the incarcerated person's social security number. 15,172 imprisonment records were linked to a death record but 2,254 records only matched on 3 of the 4 identifiers. 416 of these records that matched on 3 of the 4 identifiers were judged to have phonetically similar last names despite different spellings and were therefore determined to reflect a matched record. 416 records is a large amount of work to manually determine a match, which not only produces potential biases, but also becomes increasingly unrealistic to undergo as the number of records increases. 
+
+The Newcastle-Ottawa Quality Assessment scale is also not specific in its comparability questions. Although all studies received a low risk of bias for this criteria, the methods at which point estimates were adjusted for potential confounders varied. In the instances where odds ratios were manually calculated, there were not point estimate adjustments. However, several studies did employ statistical adjustments such as in Spittal et al (2014) where sex, age, marital status, length of incarceration status, reason for incarceration, and number of prior imprisonments were included in the analysis. Pridemore et al (2014) These types of covariates are potentially important predictors of suicide risk after incarceration, but not every study is able to acquire this amount of data. 
+
+```{r nos_kappa, include=F}
+nos <- read_csv("data/kappa/nos_kappa.csv")
+ckap(nos[, c("rater_1", "rater_2")], weight = "unweighted",  # 0.82
+     std.err = "Cohen",                                      # (0.72, 0.92)
+     conf.level = 0.95)
+```
+
+#### Results of individual studies
+
+Individual study data are reported in Table 3 while study-level effect sizes are reported in Figure 2. A fixed effect meta-analysis was also performed (see Appendix Figure 1). In addition to the overall pooled sample random effects model, two sub-analyses were performed. The study level effect sizes for these sub-analyses can be seen in Figures 3-4. 
+
+#### Narrative Synthesis of results
+
+Most of the studies, with the exception of Nieuwbeerta et al (2008)[@nieuwbeerta_mortality_2008], Rosen et al (2008)[@rosen_all-cause_2008], Lim et al (2012)[@lim_risks_2012], and Pridemore (2014)[@pridemore_mortality_2014], reported an increased risk for suicide among previously incarcerated persons when compared to the general population. Among the studies that reported an increased risk for suicide, a few had large confidence intervals, possibly due to the small sample sizes, such as in Putkonen et al (2001)[@putkonen_female_2001], Lindqvist et al (2007)[@lindqvist_mortality_2007], and Dirkzwager et al (2012)[@dirkzwager_effects_2012]. All of the retrospective cohort studies and case-control studies ascertained death by suicide via death certificates and record linkage to previous incarceration. Since Dirkzwager et al (2012)[@dirkzwager_effects_2012] was a longitudinal cohort study, suicide death was observed during the duration of the study. All studies took place in a high-income, Westernized country. Besides Pratt et al (2006)[@pratt_suicide_2006], studies were non-specific in the reason for incarceration. Putkonen et al (2001) included only females that were imprisoned for homicide. Overall, the method at ascertaining the risk of suicide among previously incarcerated persons to the general population followed the same methodology. Suicide deaths were linked to previously incarcerated persons and compared to the general population that accounted for gender-, age-, race/ethnicity. Differences emerged, however, in the size of population studied and the location, as well as year of publication. 
+
+Studying a rare outcome such as suicide is a difficult and often expensive research project. To gather enough data and perform low-er cost studies, it appears that most studies in this field rely on retrospective cohort designs to utilize record linkage. The pitfalls of record linkage have been discussed above with respect to the Newcastle Ottawa Scale. However, these types of studies do allow for much larger sample sizes than a case control study or prospective cohort study, at least in terms of observed suicides. For instance, Pridemore et al (2014) was the only case-control study and had one of the smallest sample sizes of the 16 included studies at 292 and 16 observed suicides. The longitudinal cohort study, Dirkzwager et al (2012) also had a small sample size at 597 and 12 observed suicides. In contrast, Lim et al (2012), a retrospective cohort study, had a sample size of 155,272 and 35 observed suicides. The scale at which the previous incarceration population might be studied varies widely between cohort vs case-control studies. 
+
+At the expense of sample sizes, case control studies do have the ability to more closely match on specific covariates that may confound the relationship between previous incarceration and suicide. These covariates, which are quite difficult to ascertain via record linkage, included previous incarceration, time of incarceration, age, substance abuse status, martial status, smoking status, and education. All of the variables are potentially important predictors and can easily be excluded from the two databases that are typically used in record-linkage studies to establish a connection. 
+
+#### Synthesis of results
+
+___Random effects meta-analysis___
+
+The overall pooled effect of suicide associated with previous incarceration compared to the general population was _OR_ = 5.19 (95% CI: 2.57, 10.45), _K_ = 16, _z_ = 4.30, _p_ < 0.0001. Inspection of the $I^{2}$ indicated 99.9% heterogeneity (Figure 2).
+
+___Sub-analysis 1: Random effects meta-analysis of studies measured with odds, risk, and hazard ratios___
+
+In the first sub-analysis examining studies that used odds, risk, or hazard ratios, the overall pooled effect of suicide associated with previous incarceration compared to the general population was _OR_ = 3.30 (95% CI: 1.66, 6.53), _K_ = 9, _z_ = 3.42, _p_ = 0.006. Inspection of the $I^{2}$ indicated 100% heterogeneity (Figure 3). 
+
+___Sub-analysis 2: Random effects meta-analysis of studies measured with SMRs___
+
+In the second sub-analysis examining studies that used SMRs, the overall pooled effect of suicide associated with previous incarceration compared to the general population was _OR_ = 9.50 (95% CI: 2.27, 39.6), _K_ = 7, _z_ = 3.09, _p_ = 0.002. Inspection of the $I^{2}$ indicated 98.3% heterogeneity (Figure 4). 
+
+___Sensitivity analysis___
+
+The sensitivity analysis (Appendix Figure 2) revealed that, despite a slight change in the strength of the increased risk of suicide among previously incarcerated persons compared to the general population, the association remained consistent. The removal of Putkonen et al (2001)[@putkonen_female_2001] had the largest pull on the effect towards the null (OR = 3.92).
+
+#### Risk of bias across studies
+
+Funnel plots that applied the trim-and-fill method were inspected to assess possible publication bias and small study effects (Figures 5-7). One potential outlier, Putkonen et al (2001)[@putkonen_female_2001] was identified. Asymmetry was not found in the funnel plots and the trim-and-fill method did not identify any potentially missing studies in the random effects model including all studies or using SMRs only (sub-analysis 2). However, in the random effects model using ratios only, the sub-analysis 1, one potential missing study was identified. 
+
+### Discussion
+
+#### Summary of evidence
+
+The present study systematically reviewed and meta-analytically examined the evidence on the relationship between previous incarceration and suicide risk. Across 16 studies between 1998 to 2018, it is clear that previously incarcerated persons are at an elevated risk for suicide when compared to the general population. Given that more than 10.74 million people are incarcerated throughout the world, and with many of these incarcerated persons eventually released, there is great cause for concern for the health and well-being of those exposed to incarceration. 
+
+There was considerable heterogeneity in the meta-analysis as evidenced by the $I^{2}$ that was greater than 98% across the main and sub-analyses. The heterogeneity appears statistical, meaning the confidence intervals involve a large amount of variability. However, across the analyses there is an observed strong and consistent negative effect on the risk of suicide among previously incarcerated persons. The heterogeneity is a problem due to our inability to accurately define the strength of the effect. With the present data, however, improving accuracy remains inaccessible: too many possible sources of heterogeneity are unaccountable for, including time period, location, type of offense, or the length of time since release from incarceration. The bulk of the studies included in this analysis involved retrospective cohorts, which were limited to what data is available in a death record and data-linkage. Despite the concerns of the statistical heterogeneity, the sensitivity analysis revealed that the overall results were not affected by any one study, providing further confidence in the direction and strength of these findings. As a result of the sensitivity analysis and qualitative assessment of the included studies, reporting the summary estimates from the meta-analysis is still warranted. Statistical test, such as the $I^{2}$ is a expression of the inconsistency of study results. Qualitatively, it is clear there is inconsistency in results, but also examining the study designs qualitatively we see many similarities that support the idea of a synthesis of results. 
+
+Putkonen et al (2001) had the largest effect size of 424.80, the smallest sample size, and was the only study that examined only female previously incarcerated persons. Although these reasons make this study a clear outlier, there is no justifiable reason to remove Putkonen et al (2001) as it meets the eligibility criteria determined prior to the analysis phase. 
+
+Many studies followed a retrospective cohort design and utilized record-linkage. Among these studies, Rosen et al (2008) stood out in the carefulness of the record linkage process. To avoid loss of data, Rosen et al (2008) manually linked 416 records, a process that is sometimes necessary due to mismatch in information. At the same time, however, this process becomes less definitive depending on the type of matching necessary and increasingly resource dependent when the records accumulate. A potentially larger issue behind record linkage is the lack of specificity in other potentially important predictor variables, such as previous incarceration length, number of times incarcerated, type of offense, disease status, psychiatric health status, social support levels, access to mental health care, to name a few. While retrospective cohort studies allow for greater sample sizes, future studies might spend more time on case control studies to capture these valuable covariates that are missing from record linkage processess. 
+
+Evidently, previously incarcerated persons are at risk for suicide when returning to the community, but what remains unclear is whether these persons were predisposed to suicide, if the exposure to imprisonment increased their risk, or an overlap of both scenarios. It is more likely than not that those observations of suicide likely had psychiatric comorbidities, which is further supported by the increased risk for psychiatric conditions among the prison population. Much more research is needed for this vulnerable population and only by improving how risk factors are identified prior to, during, and after imprisonment will a more full picture of this public health crisis be understood.
+
+Due to the focus on retrospective cohorts that used record linkage in this meta-analysis, the more specific risk factors that are involved with incarceration were not able to be examined closely. However, these results are consistent with the literature that those previously incarcerated are at an elevated risk of suicide compared to the general population. It is likely, as identified by Zhong et al (2021)[@zhong_risk_2021], that the risk factors among those previously incarcerated likely were present during imprisonment. These risk factors may include psychiatric diagnosis, suicidal ideation, and single-cell occupancy. We might expect, for instance, that the experience of single-cell occupancy, which is a form of social isolation, may increase the risk of suicide after release into the community. 
+
+At the present moment, programs for prisoners released into the community are few and underfunded. In the United States, re-entry programs receive roughly 100 million, which is small compared to the corrections cost of 80 billion a year. While the focus of this study is on suicide, greater resources allocated towards re-entry would not only help prevent loss of life to suicide, but also reduce recidivism. These programs ought to focus on establishing security for individuals in terms of finances, social support, and physical and mental health care. It is a surmountable expectation that someone released from prison without a job, no money, or a place to live, will thrive. 
+
+The concern for re-entry program funding brings up an even larger question: Should incarceration still exist? Increased funding for the prison system, both for the time within prison and re-entry to the community, may only treat the symptoms of the underlying public health issues. Incarceration appears to be a risk factor for suicide, and that very exposure to incarceration ought to be the focus of how to move forward. Rehabilitation programs may be better suited for improving the lives of those who have committed a crime rather than punishment that involves taking away their opportunity to change themselves. Moreover, if incarceration worked then why do we see such large numbers of recidivism or elevated risk of suicide? 
+
+To prevent the loss of life among those previously incarcerated, more attention and care is needed to ensure rehabilitation into community life is provided. 
+
+#### Limitations
+
+While the conclusions were bolstered by the stringent inclusion criteria that previously incarcerated persons must be compared to similar age-, gender-, and race/ethnicity general population controls, these same inclusion criteria limited the available studies for review. 16 studies made it to full-text review that were later excluded due to the general population not meeting the comparison criteria. It is possible that these excluded studies may have pulled the present study’s results towards or away from the null. However, without running the studies with these data it is not possible to determine how the present studies may be affected. These type of studies typically require large amounts of data and well-documented records of both suicide deaths and previous incarceration, which may prove difficult to link in countries with less infrastructure. While funnel plots with the trim and fill method did not reveal any publication bias, there was a clear lack of representation of studies outside of high-income, Western countries. It is very likely that the present meta-analysis is examining only one part of the whole picture. China, for example, has over 1.65 million prisoners, but the available research for that population remains sparse. Both structural and cultural differences by country may exist that could increase or decreases the risk for suicide among previously incarcerated persons. By keeping the inclusion criteria so narrow, these type of data remained out of reach. 
+
+An added limitation to the focus on developed Westernized countries is the availability of such databases to link, however imperfect, that is not present in less developed countries. Creating and maintaining these databases is expensive, time consuming, and not always the focus when the persons involved are those most marginalized in society. The very existence of these databases to allow record linkage does not necessarily mean previously incarcerated persons in non-developed countries are at greater risk for suicide than previously incarcerated persons in developed countries. This fact does mean we are unable to study this association with record linkage in less developed countries.
+
+With 14 of the 16 studies using record-linkage techniques to ascertain previous incarceration and suicide death, there is a necessary consideration of the drawbacks of this technique. At the onset, at least in developed countries, there is often a number of barriers that must be passed before one can access the data. These barriers usually revolve around protection of sensitive data, such as incarceration status and health outcomes. Access to these data can sometimes take so long that the time funded for a given project may have lapsed[@zhong_risk_2021]. Once researchers have access, there is the need to carefully store the data. Record-linkage is prone to error as the underlying entries may be incorrect and difficult if not impossible to resolve since those that manage the databases are likely beyond the research team. Often times there is not a unique identifier shared across databases to perform the linkage, and therefore researchers need to rely on techniques such as blocking, deterministic linkage, probabilistic linkage, or similar techniques. However, these techniques are not perfect and typically rely on probability or an acceptable amount of error to determine a match[@harron_challenges_2017]. As a result, a degree of inaccuracy is likely present in the results of this meta-analysis as the underlying data used is prone to error. However, givne the state of the field record linkage remains the most feasible way to study the incarcerated population. Until greater funding sources are provided, researchers may be limited to usage of record linkage techniques.
+
+Due to the small sample size of 16, the present meta-analysis must be interpreted with some hesitancy. With only 16 studies across two decades meeting this high standard of comparability criteria, there is much more to learn. Moreover, across the different studies a wide range of measures of association were used, all of which do not lend themselves to easy comparability. The two sub-analyses aimed to reduce this possible bias, which indeed showed a consistently strong increased risk for suicide for previously incarcerated persons compared to the general population. Moreover, the sensitivity analysis provided additional assurances. Still, by subsetting the meta-analysis into smaller sample sizes, the strength of the analysis decreased. 
+
+Future studies should seek to address the heterogeneity of study designs. With such a wide range of studies sparsely conducted across two decades, consistency was not found. Using more comparable designs will help reduce heterogeneity to better improve the accuracy of the effect.
+
+While the majority of previously incarcerated persons are males, which was reflected in the present study's sample, the experience of previously incarcerated women is not generalizable with the present findings. One included study by Putkonen et al (2001)[@putkonen_female_2001] found that homicidal woman have over 200-fold risk of unnatural death, rising to over 400-fold for suicide. The current state of the literature does not allow for greater specificity of this risk among previously incarcerated woman. 
+
+
+#### Conclusions
+
+Previously incarcerated persons are at an elevated risk for suicide compared to the general population. While the risk is clear, the current study has revealed a need for more research among the previously incarcerated population in terms of gender, location, and concordance of study designs. The prison system and health and social services are obligated to work more closely together to ensure this vulnerable population is cared for to solve this public health crisis.
+
+#### Funding
+
+No funding was provided for the present systematic review and meta-analysis. 
+
+### Figures & Tables
+
+Figure 1: PRISMA 
+
+```{r fig_1_prisma, echo=F, fig.align='center', out.width="150%"}
+prisma_dir <- "data/figures/prisma.pdf"
+knitr::include_graphics(path = prisma_dir)
+```
+
+\newpage
+
+```{r table_1, echo=F, message=F}
+tab_1 <- read_csv("data/table_1.csv") %>% arrange(Authors)
+
+# for saving a copy & ordering by year
+#tab_1 <- tab_1 %>% arrange(Year)
+
+tab_1$doi <- NULL # remove for now
+
+# calculate % male overall sample
+tab_1 <- tab_1 %>% 
+  mutate(`% Male` = ifelse(`% Male` == "Not providied", NA, `% Male`),
+         `% Male` = ifelse(`% Male` == "89", "89.0", `% Male`))        # nitpicky
+#sum(as.numeric(tab_1$`% Male`), na.rm = TRUE )/ nrow(tab_1) # 81.66%
+# change back to readable NA for table
+tab_1 <- tab_1 %>% 
+  mutate(`% Male` = ifelse(is.na(`% Male`), "Not providied", `% Male`),
+         Authors = paste0(Authors, " (", Year, ")")) %>%
+  rename(Study = Authors) %>%
+  select(-c(Year))
+
+
+
+# alignment values
+def_par_left <- fp_par(text.align = "left")
+def_par_center <- fp_par(text.align = "center")
+
+ft_1 <- regulartable(
+  tab_1, col_keys = names(tab_1)) %>%
+  # column widths
+  width(j = 1, width = 1.7) %>%                     # easier to read authors
+  width(j = 2:4, width = 0.8) %>%
+  width(j = 5:6, width = 1.2) %>%
+  width(j = 7, width = 1.4) %>%
+  # alignment
+  style(j = 1, pr_p = def_par_left, part = "all") %>%      # left align authors
+  style(j = 2:7, pr_p = def_par_center, part = "all") %>%  # center align everything else
+  colformat_num(j = 2, big.mark="") %>%                    # remove comma for years
+  set_caption(caption = "Table 1. Summary of included studies") %>%
+  flextable::footnote(j = 4, 
+           value = as_paragraph(c("HR: Hazard Ratio \n  SMR: Standardized Mortality Ratio \n  OR: Odds Ratio \n  RR: Risk Ratio")), 
+           part = "header")
+
+# color every other grey 
+rows_to_color <- seq(1, nrow(tab_1), by = 2)
+for(i in rows_to_color) {
+  ft_1 <- bg(ft_1, i = i, part = "body", bg = "#d3d3d3")
+}
+
+ft_1
+
+#save_as_image(ft_1, "table_1.png", zoom = 3, expand = 10, webshot = "webshot2")
+
+```
+
+\newpage
+
+** table 2 nos goes here; could not automate ** 
+
+\newpage
+
+```{r table_3, echo=F, message=F}
+# need to calculate OR and CI's for these studies
+dat <- read_csv("data/OR_calculate.csv")
+OR_calc <- escalc(measure="OR",       # the effect size or outcome measure type
+                   ai=tpos,           # upper left cell (positive in treatment group)
+                   bi=tneg,           # upper right cell (negative in treatment group)
+                   ci=cpos,           # lower left cell (positive in control group)
+                   di=cneg,           # lower right cell (negative in control group)
+                   data=dat) %>%
+  mutate(association = "OR") %>%
+  select(author, dop, yi, vi, association) # vi needed for summary
+
+#summary(OR_calc)                           # uses escalc object to get CI's
+OR_CI <- tibble(ci.lb = c(0.1185, 0.1638, 0.1961, 2.2652),
+                ci.ub = c(1.9891, 0.9073, 0.3467, 2.7870))     
+OR_calc <- cbind(OR_calc, OR_CI) %>% select(-c(vi))     
+
+# grab other studies that already have effects and CI's
+dat <- read_csv("data/var_calculate.csv") %>% 
+  select(author, dop, yi, ci.lb, ci.ub, association)
+
+# combine
+tab_3 <- rbind(OR_calc, dat) %>%
+  mutate(author = paste0(author, " (", dop, ")")) %>% # making author label
+  rename(Study = author,
+         Effect = yi,
+         Association = association,
+         `Lower CI` = ci.lb,
+         `Upper CI` = ci.ub) %>%
+  arrange(Study) %>%
+  select(-c(dop))
+
+ft_3 <- regulartable(
+  tab_3, col_keys = names(tab_3)) %>%
+  # column widths
+  width(j = 1, width = 1.7) %>%                            # easier to read authors
+  # alignment
+  style(j = 1, pr_p = def_par_left, part = "all") %>%      # left align authors
+  style(j = 2:4, pr_p = def_par_center, part = "all") %>%  # center align everything else
+  set_caption(caption = "Table 3. Summary effects sizes for suicide for previously incarcerated persons vs. general population") %>%
+  flextable::footnote(j = 3, 
+           value = as_paragraph(c("HR: Hazard Ratio \n  SMR: Standardized Mortality Ratio \n  OR: Odds Ratio \n  RR: Risk Ratio")), 
+           part = "header")
+
+# color every other grey 
+rows_to_color <- seq(1, nrow(tab_3), by = 2)
+for(i in rows_to_color) {
+  ft_3 <- bg(ft_3, i = i, part = "body", bg = "#d3d3d3")
+}
+
+ft_3
+```
+
+Figure 2. Forest plot of suicide risk among previous incarcerated persons compared to the general population, results of random effects meta-analysis with all studies
+
+\newpage
+
+```{r fig_2, echo=F, fig.width=8, fig.height=5}
+dat <- readRDS("data/processed_data.rds") %>% arrange(yi) # sort by effect size
+model_2 <- metagen(yi,                                    # effect size / TE
+                  vi,                                     # variance / seTE
+                  data = dat,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  prediction = TRUE,
+                  method.tau = "PM",
+                #  backtransf = FALSE,
+                  sm = "OR")
+
+#grid.text("My custom title", .5, .9, gp=gpar(cex=2))
+
+forest(model_2,
+       xlim = c(0.1, 450),
+       at = c(0.5, 1, 2, 3, 5, 10, 25, 425),
+       col.predict = "#02a4d3",
+       col.predict.lines = "#02a4d3",
+       leftcols = c("studlab", "N"),
+       just = "center",
+       print.tau2 = FALSE,
+       prediction = FALSE,
+       col.random = "#e0115f",   # random effects dotted line
+       col.diamond = "#e0115f")#,
+     #  backtransf = FALSE)       # log odds
+
+#summary(model_2)
+```
+
+\newpage
+
+Figure 3: Forest plot of suicide risk among previous incarcerated persons compared to the general population, results of random effects meta-analysis with only OR, risk, and hazard ratios
+
+```{r fig_3, echo=F, fig.width=8, fig.height=5}
+ratios_only <- dat %>%
+  filter(association %in% c("OR", "RR", "HR"))
+
+model_3 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = ratios_only,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  prediction = TRUE,
+                  method.tau = "PM",
+          #        backtransf = FALSE,
+                  sm = "OR")
+#model_3
+forest(model_3,
+       xlim = c(0.1, 15),
+       at = c(0.5, 1, 2, 3, 5, 10, 15),
+       col.predict = "#02a4d3",
+       col.predict.lines = "#02a4d3",
+       leftcols = c("studlab", "N"),
+       just = "center",
+       print.tau2 = FALSE,
+       prediction = FALSE,
+       col.random = "#007ba7",   # random effects dotted line
+       col.diamond = "#007ba7") #,
+    #   backtransf = FALSE)
+#funnel(model_3, xlab = "Hedges' g", studlab = TRUE)
+```
+
+\newpage
+
+Figure 4: Forest plot of suicide risk among previous incarcerated persons compared to the general population, results of random effects meta-analysis with only SMRs
+
+```{r fig_4, echo=F,  fig.width=8, fig.height=5}
+smrs_only <- dat %>%
+  filter(association == "SMR")
+
+model_4 <- metagen(yi,                      # effect size / TE
+                  vi,                       # variance / seTE
+                  data = smrs_only,
+                  studlab = paste(author),
+                  comb.fixed = FALSE,
+                  comb.random = TRUE,
+                  prediction = TRUE,
+                  method.tau = "PM",
+                 # backtransf = FALSE,
+                  sm = "OR")
+#model_4
+forest(model_4,
+       xlim = c(0.1, 450),
+       at = c(0.5, 1, 2, 3, 5, 10, 25, 425),
+       col.predict = "#02a4d3",
+       col.predict.lines = "#02a4d3",
+       leftcols = c("studlab", "N"),
+       just = "center",
+       print.tau2 = FALSE,
+       prediction = FALSE,
+       col.random = "#00b374",   # random effects dotted line
+       col.diamond = "#00b374")#,
+   #    backtransf = FALSE)
+#funnel(model_4, xlab = "Hedges' g", studlab = TRUE)
+
+#summary(model_4)
+```
+
+\newpage
+
+Figure 5: Funnel plot of random-effects meta-analysis with all studies
+
+```{r fig_5, echo=F, message=F}
+res2 <- rma(yi, vi, data=dat, measure="OR")
+taf2 <- trimfill(res2)
+funnel(taf2, legend = TRUE)
+```
+
+\newpage
+
+Figure 6: Funnel plot of random-effects meta-analysis with studies including only odds, risk, and hazard ratios 
+
+```{r fig_6, echo=F, message=F}
+res3 <- rma(yi, vi, data=ratios_only, measure="OR")
+taf3 <- trimfill(res3)
+funnel(taf3, legend = TRUE)
+```
+
+\newpage
+
+Figure 7: Funnel plot of random-effects meta-analysis with only studies including standardized mortality ratios (SMRs) 
+
+```{r fig_7, echo=F, message=F}
+res4 <- rma(yi, vi, data = smrs_only, measure="OR")
+taf4 <- trimfill(res4)
+funnel(taf4, legend = TRUE)
+```
+
+\newpage
+
+### Appendix
+
+Appendix, Figure 1: Fixed-effects meta-analysis with all studies included
+
+```{r, fig_, echo=F, message=F, fig.width=7, fig.height=5}
+model_1 <- metagen(yi,
+                   vi,
+                   data=dat,
+                   studlab=paste(author),
+                   comb.fixed=TRUE,
+                   comb.random=FALSE,
+                   prediction=FALSE,
+                   sm="OR",
+                   hakn=TRUE)
+
+forest(model_1,
+       layout = "JAMA",
+       text.predict = "95% PI",
+       col.predict = "#02a4d3")
+
+
+#summary(model_1)
+```
+
+\newpage
+
+Appendix, Figure 2: Sensitivity analysis on the random-effects model with all studies included
+
+```{r, echo=F, message=F, fig.width=7, fig.height=5}
+model_2_inf <- InfluenceAnalysis(model_2, random = TRUE, 
+                                 return.separate.plots = TRUE,
+                                 forest.lims = c(2, 46))
+
+#summary(model_2_inf)
+
+plot(model_2_inf, "es")
+#plot(model_2_inf, "i2")
+```
+
+\newpage
+
+### References
+
+\  

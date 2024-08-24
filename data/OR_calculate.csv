@@ -1,0 +1,5 @@
+study.id,author,es.id,dop,tpos,tneg,cpos,cneg,obs_suicides,design,N
+1,Joukamaa,1,1998,17,886,6,897,17,cohort,903
+6,Nieuwbeerta et al,2,2008,28,55200,4081,13744800,28,cohort,4615
+7,Rosen et al,3,2008,752,14921,13284,345757,752,cohort,15673
+13,Haglund et al,4,2014,127,102,26826,269428,127,cohort,26953

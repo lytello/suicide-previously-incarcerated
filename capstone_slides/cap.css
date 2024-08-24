@@ -1,0 +1,22 @@
+.methods {
+  padding:10px;
+  top: 50%;
+  left: 50%;
+  background-color: #007ba7;
+  background-position: 0% 25%;
+  background-size: ;
+  background-repeat: no-repeat;
+  border: 2px;
+}
+
+.background {
+  background-color: #FFFFFF;
+}
+
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
