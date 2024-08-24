@@ -2,8 +2,8 @@
 
 This repository documents part of my workflow for my Masters of Public Health capstone project. I completed a systematic review and meta-analysis to assess whether previously incarcerated persons are at greater risk of suicide: 
 
-<u>Previously incarcerated persons are at an elevated risk for suicide compared to the general
-population.</u>
+**Previously incarcerated persons are at an elevated risk for suicide compared to the general
+population.**
 
 For this project I challenged myself to automate what parts I could, which was possible after completing the systematic review portion of the study to generate the dataset for the meta-analysis. Thank you to my classmates for going through that (painful) process!
 
