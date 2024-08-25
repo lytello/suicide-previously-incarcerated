@@ -21,6 +21,10 @@ Please feel free to reach out to me if you'd like to use these materials for you
 
 ## Examples Figures
 
+### PRISMA
+
+![](/data/figures/prisma.jpg)
+
 ### Forest Plot
 
 Forest plot of suicide risk among previous incarcerated persons compared to the
